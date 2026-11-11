@@ -1,0 +1,28 @@
+# Alex Erlandsson
+
+> Personal site of Alex (Alexander) Erlandsson, a front-end developer based in Gothenburg, Sweden, who builds scalable and accessible design systems.
+
+Alex has been making interfaces since 2015. His work centres on design systems and on bridging design and development, mostly in React, TypeScript and CSS Modules, with a strong interest in CSS and web accessibility. He has worked on large-scale projects.
+
+- Name: Alex Erlandsson (Alexander Erlandsson)
+- Role: Front-end developer
+- Location: Gothenburg, Sweden
+- Focus: design systems, CSS, accessibility, front-end architecture
+- Tools: React, TypeScript, CSS Modules
+- Contact: contact@alexerlandsson.com
+
+## About this site
+
+The site is a single page. One sentence, set in a serif typeface, drifts across the screen on a slow wave and responds to touch and pointer: it can be pulled, flicked and tapped. The background colour changes on each visit. The page is plain HTML, CSS and JavaScript with no framework, no tracking and no cookies. The animation can be paused, and it holds still for visitors who prefer reduced motion.
+
+The sentence on the page reads: "I'm Alex, a front-end developer in Gothenburg who builds scalable, accessible design systems in React, TypeScript and CSS Modules. Making interfaces since 2015."
+
+## Pages
+
+- [Home](https://alexerlandsson.com/): The whole site
+
+## Profiles
+
+- [GitHub](https://github.com/alexerlandsson/): Code and open-source work
+- [CodePen](https://codepen.io/alexerlandsson): CSS experiments and front-end demos
+- [LinkedIn](https://se.linkedin.com/pub/alexander-erlandsson/55/8a5/159): Professional background

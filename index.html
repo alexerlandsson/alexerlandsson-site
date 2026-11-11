@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Alex Erlandsson – Front-end Developer</title>
+<meta name="description" content="Alex Erlandsson is a front-end developer in Gothenburg, Sweden, building scalable, accessible design systems in React, TypeScript and CSS Modules.">
+<meta name="author" content="Alexander Erlandsson">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://alexerlandsson.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Alex Erlandsson">
+<meta property="og:title" content="Alex Erlandsson – Front-end Developer">
+<meta property="og:description" content="Front-end developer in Gothenburg, Sweden, building scalable, accessible design systems in React, TypeScript and CSS Modules.">
+<meta property="og:url" content="https://alexerlandsson.com/">
+<meta property="og:image" content="https://alexerlandsson.com/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The words “I’m Alex, a front-end developer” in cream serif letters, riding a wave across a blue field.">
+
+<!-- X / Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@alexerlandsson">
+<meta name="twitter:creator" content="@alexerlandsson">
+<meta name="twitter:title" content="Alex Erlandsson – Front-end Developer">
+<meta name="twitter:description" content="Front-end developer in Gothenburg, Sweden, building scalable, accessible design systems in React, TypeScript and CSS Modules.">
+<meta name="twitter:image" content="https://alexerlandsson.com/og-image.png">
+<meta name="twitter:image:alt" content="The words “I’m Alex, a front-end developer” in cream serif letters, riding a wave across a blue field.">
+
+<!-- Icons and install -->
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" id="favicon">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Alex">
+<meta name="theme-color" content="#2B35E8">
+
+<!-- Identity -->
+<link rel="me" href="https://github.com/alexerlandsson/">
+<link rel="me" href="https://codepen.io/alexerlandsson">
+<link rel="me" href="https://se.linkedin.com/pub/alexander-erlandsson/55/8a5/159">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Instrument+Sans:wght@500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://alexerlandsson.com/#website",
+      "url": "https://alexerlandsson.com/",
+      "name": "Alex Erlandsson",
+      "description": "Personal site of Alex Erlandsson, a front-end developer in Gothenburg, Sweden.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://alexerlandsson.com/#person" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://alexerlandsson.com/#profilepage",
+      "url": "https://alexerlandsson.com/",
+      "name": "Alex Erlandsson – Front-end Developer",
+      "description": "Alex Erlandsson is a front-end developer in Gothenburg, Sweden, building scalable, accessible design systems in React, TypeScript and CSS Modules.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://alexerlandsson.com/#website" },
+      "about": { "@id": "https://alexerlandsson.com/#person" },
+      "mainEntity": { "@id": "https://alexerlandsson.com/#person" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://alexerlandsson.com/og-image.png",
+        "width": 1200,
+        "height": 630
+      },
+      "dateModified": "2026-11-11"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://alexerlandsson.com/#person",
+      "name": "Alex Erlandsson",
+      "alternateName": "Alexander Erlandsson",
+      "givenName": "Alexander",
+      "familyName": "Erlandsson",
+      "url": "https://alexerlandsson.com/",
+      "jobTitle": "Front-end Developer",
+      "description": "Front-end developer who builds scalable and accessible design systems, bridging design and development.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gothenburg",
+        "addressCountry": "SE"
+      },
+      "knowsAbout": [
+        "Front-end development",
+        "Design systems",
+        "CSS",
+        "CSS Modules",
+        "React",
+        "TypeScript",
+        "Web accessibility"
+      ],
+      "sameAs": [
+        "https://github.com/alexerlandsson/",
+        "https://codepen.io/alexerlandsson",
+        "https://se.linkedin.com/pub/alexander-erlandsson/55/8a5/159"
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    /* Fallback pair. The script below picks one of its palettes on each load. */
+    --ground: #2B35E8;  /* the field */
+    --ink: #F6F1E4;     /* the letters */
+  }
+
+  html, body { height: 100%; margin: 0; }
+  body { background: var(--ground); color: var(--ink); overflow: hidden; }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .stage {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    font-family: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    font-size: clamp(1.875rem, 5.2vw, 4.75rem);
+    font-weight: 360;
+    font-optical-sizing: auto;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    touch-action: pinch-zoom; /* one finger plays with the wave, two fingers still zoom */
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .stage:active { cursor: grabbing; }
+
+  /* Without JavaScript the sentence is simply set as text. */
+  .sentence {
+    margin: 0;
+    padding: 14vh 7vw;
+    max-width: 22ch;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  /* With JavaScript it stays in the page for screen readers and search engines. */
+  .js .sentence {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Sits outside the stage so a tap on it is a tap, not a pull on the wave. */
+  .elsewhere {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    pointer-events: none;
+    font-family: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+  .elsewhere a {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 0 12px;
+    color: var(--ink);
+    border-radius: 6px;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+  .elsewhere a:hover { text-decoration-thickness: 2px; }
+  .elsewhere a svg { width: 9px; height: 9px; }
+
+  /* Play / pause, top right. Icon only; its name lives in aria-label. */
+  .motion {
+    position: fixed;
+    top: calc(8px + env(safe-area-inset-top, 0px));
+    right: calc(8px + env(safe-area-inset-right, 0px));
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .motion[hidden] { display: none; }
+  .motion svg { width: 12px; height: 14px; fill: currentColor; }
+  .motion .icon-play,
+  .motion[data-state="paused"] .icon-pause { display: none; }
+  .motion[data-state="paused"] .icon-play { display: block; }
+
+  .elsewhere a:focus-visible,
+  .motion:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
+
+  .measure {
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+    white-space: pre;
+    pointer-events: none;
+  }
+  .letters { position: absolute; inset: 0; pointer-events: none; }
+  .glyph {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    white-space: pre;
+    line-height: 1;
+    transform-origin: 0 0;
+    will-change: transform;
+    visibility: hidden;
+  }
+
+  @media print {
+    body { background: #fff; color: #000; overflow: visible; }
+    .stage { position: static; }
+    .letters, .measure, .motion { display: none; }
+    .js .sentence { position: static; width: auto; height: auto; margin: 0; padding: 14vh 7vw; overflow: visible; clip-path: none; white-space: normal; }
+    .elsewhere { position: static; }
+    .elsewhere a { color: #000; }
+  }
+</style>
+
+<script>
+/* A different field colour on each load. Runs in the head so the first paint is already right.
+   Every pair has a contrast ratio of 6:1 or better. */
+(function () {
+  var palettes = [
+    /* ground,    ink */
+    ['#2B35E8', '#F6F1E4'], // ultramarine
+    ['#10402F', '#F3EBD3'], // forest
+    ['#3A1638', '#F7D9E3'], // aubergine
+    ['#FF5A36', '#1A0F0A'], // vermilion
+    ['#F4D35E', '#1D1A3A'], // butter
+    ['#C9B8FF', '#1F1147'], // lilac
+    ['#BFE8D0', '#0F3B2E'], // mint
+    ['#FFB8D2', '#4A0D24']  // rose
+  ];
+  var i = Math.floor(Math.random() * palettes.length);
+  try {
+    /* never the same colour twice in a row */
+    var last = parseInt(localStorage.getItem('ground-index'), 10);
+    if (i === last) i = (i + 1) % palettes.length;
+    localStorage.setItem('ground-index', String(i));
+  } catch (err) { /* storage is optional */ }
+  var root = document.documentElement.style;
+  root.setProperty('--ground', palettes[i][0]);
+  root.setProperty('--ink', palettes[i][1]);
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', palettes[i][0]);
+})();
+</script>
+</head>
+<body>
+
+<main class="stage" id="stage">
+  <h1 class="visually-hidden">Alex Erlandsson, front-end developer</h1>
+  <!-- Edit the sentence here. -->
+  <p class="sentence" id="sentence">I’m Alex, a front-end developer in Gothenburg who builds scalable, accessible design systems in React, TypeScript and CSS Modules. Making interfaces since 2015.</p>
+</main>
+
+<button type="button" class="motion" id="motion" data-state="playing" aria-label="Pause animation" title="Pause animation" hidden>
+  <svg class="icon-pause" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><rect width="4" height="14" rx="1"/><rect x="8" width="4" height="14" rx="1"/></svg>
+  <svg class="icon-play" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M1 0.6v12.8a.6.6 0 0 0 .9.5l10.4-6.4a.6.6 0 0 0 0-1L1.9.1a.6.6 0 0 0-.9.5z"/></svg>
+</button>
+
+<footer class="elsewhere">
+  <a href="https://github.com/alexerlandsson/" target="_blank" rel="me noopener">GitHub<svg viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M2.5 1H9v6.5M9 1 1 9" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- settings ---------- */
+  var DIRECTION = -1;      // -1 = right to left (reads as it arrives), 1 = left to right
+  var SPEED = 1;           // drift speed multiplier, 0 stops the drift
+  var WAVE_HEIGHT = 1;     // wave height multiplier, 0 to about 1.6
+
+  var stage = document.getElementById('stage');
+  var source = document.getElementById('sentence');
+  if (!stage || !source || !window.requestAnimationFrame) return;
+  document.documentElement.classList.add('js');
+
+  var unit = (source.textContent || '').replace(/\s+/g, ' ').trim();
+  if (!unit) return;
+
+  var measureEl = document.createElement('span');
+  measureEl.className = 'measure';
+  measureEl.setAttribute('aria-hidden', 'true');
+  measureEl.textContent = unit;
+  stage.appendChild(measureEl);
+
+  var lettersEl = document.createElement('div');
+  lettersEl.className = 'letters';
+  lettersEl.setAttribute('aria-hidden', 'true');
+  stage.appendChild(lettersEl);
+
+  /* ---------- state ---------- */
+  var ptr = { x: 0, y: 0, vx: 0, t: 0, down: false, inside: false, type: 'mouse', seen: false };
+  var pull = { x: 0, y: 0, v: 0 };
+  var ripples = [];
+  var items = [];
+  var energy = 0, fling = 0, loose = 0, flow = null;
+  var p1 = 1.2, p2 = 0, p3 = 0, ps = 0, tb = 0;
+  var dirty = true, last = 0;
+  var W = 0, H = 0, fs = 40, loopLen = 0, totalLen = 0;
+  var Y = null, S = null;
+
+  /* ---------- motion: follows the system setting until the visitor chooses ---------- */
+  var calm = false;          // true = the drift and the wave hold still
+  var prefersCalm = false;
+  var chosen = null;
+  var motionBtn = document.getElementById('motion');
+
+  function syncMotion() {
+    calm = chosen === null ? prefersCalm : chosen;
+    if (motionBtn) {
+      var label = calm ? 'Play animation' : 'Pause animation';
+      motionBtn.setAttribute('data-state', calm ? 'paused' : 'playing');
+      motionBtn.setAttribute('aria-label', label);
+      motionBtn.setAttribute('title', label);
+    }
+  }
+
+  try {
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersCalm = mq.matches;
+    if (mq.addEventListener) {
+      mq.addEventListener('change', function (ev) {
+        prefersCalm = ev.matches;
+        syncMotion();
+      });
+    }
+  } catch (err) { /* keep motion on */ }
+
+  if (motionBtn) {
+    motionBtn.hidden = false;
+    motionBtn.addEventListener('click', function () {
+      chosen = !calm;
+      syncMotion();
+      if (calm) {
+        /* pausing also drops whatever the last flick or tap left behind */
+        fling = 0;
+        energy = 0;
+        ripples.length = 0;
+      }
+    });
+  }
+  syncMotion();
+
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  /* ---------- measure the sentence and build one span per letter ---------- */
+  function measure() {
+    var node = measureEl.firstChild;
+    if (!node) return false;
+
+    var chars = Array.from(unit);
+    var range = document.createRange();
+    var left = [], wid = [];
+    var off = 0, i;
+    for (i = 0; i < chars.length; i++) {
+      range.setStart(node, off);
+      range.setEnd(node, off + chars[i].length);
+      var r = range.getBoundingClientRect();
+      left.push(r.left);
+      wid.push(r.width);
+      off += chars[i].length;
+    }
+
+    var size = parseFloat(getComputedStyle(stage).fontSize) || 40;
+    var n = chars.length;
+    var pos = [], adv = [];
+    var c = 0, space = 0;
+    for (i = 0; i < n; i++) {
+      var a = i < n - 1 ? left[i + 1] - left[i] : wid[i];
+      if (!(a > 0) || a > size * 3) a = (chars[i] === ' ' ? 0.26 : 0.52) * size;
+      adv.push(a);
+      if (!space && chars[i] === ' ') space = a;
+      pos.push(c);
+      c += a;
+    }
+    /* one ordinary word space joins the end of the sentence to its start */
+    var L = c + (space || size * 0.26);
+
+    /* enough passes of the sentence that no letter is ever needed twice */
+    var copies = Math.min(8, Math.max(1, Math.ceil(((stage.clientWidth + size * 5) * 2.2) / L)));
+
+    var shown = [];
+    for (i = 0; i < n; i++) if (chars[i] !== ' ') shown.push(i);
+
+    var wanted = shown.length * copies;
+    while (lettersEl.childNodes.length > wanted) lettersEl.removeChild(lettersEl.lastChild);
+    while (lettersEl.childNodes.length < wanted) {
+      var span = document.createElement('span');
+      span.className = 'glyph';
+      lettersEl.appendChild(span);
+    }
+
+    var next = [];
+    var e = 0;
+    for (var k = 0; k < copies; k++) {
+      for (var s = 0; s < shown.length; s++) {
+        var idx = shown[s];
+        var el = lettersEl.childNodes[e++];
+        if (el.textContent !== chars[idx]) el.textContent = chars[idx];
+        el.style.visibility = 'hidden';
+        next.push({ el: el, u: pos[idx] + adv[idx] / 2 + k * L, seed: (pos[idx] + k * L) / (size * 1.4), vis: false, y: 0, vy: 0 });
+      }
+    }
+
+    if (loopLen && flow != null) flow *= L / loopLen;
+    items = next;
+    loopLen = L;
+    totalLen = L * copies;
+    fs = size;
+    return true;
+  }
+
+  /* ---------- pointer ---------- */
+  function point(e) {
+    var r = stage.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+
+  function ripple(x, amp) {
+    ripples.push({ x: x, age: 0, amp: amp * (calm ? 0.3 : 1) });
+    if (ripples.length > 6) ripples.shift();
+  }
+
+  stage.addEventListener('pointerdown', function (e) {
+    var q = point(e);
+    ptr.x = q.x; ptr.y = q.y;
+    ptr.t = e.timeStamp;
+    ptr.vx = 0;
+    ptr.seen = true;
+    ptr.down = true;
+    ptr.inside = true;
+    ptr.type = e.pointerType || 'mouse';
+    try { stage.setPointerCapture(e.pointerId); } catch (err) { /* a nicety */ }
+    ripple(q.x, fs * 0.5);
+  });
+
+  stage.addEventListener('pointermove', function (e) {
+    var q = point(e);
+    if (ptr.seen) {
+      var dx = q.x - ptr.x;
+      var dy = q.y - ptr.y;
+      energy = Math.min(1, energy + Math.hypot(dx, dy) / 700);
+      if (ptr.down) {
+        if (flow != null) flow += dx;
+        var dtm = Math.max(0.004, (e.timeStamp - ptr.t) / 1000);
+        ptr.vx += (dx / dtm - ptr.vx) * 0.4;
+      }
+    }
+    ptr.x = q.x; ptr.y = q.y; ptr.t = e.timeStamp;
+    ptr.seen = true;
+    ptr.type = e.pointerType || 'mouse';
+    ptr.inside = ptr.type !== 'touch' || ptr.down;
+  });
+
+  stage.addEventListener('pointerup', function (e) {
+    if (!ptr.down) return;
+    ptr.down = false;
+    if (ptr.type === 'touch') ptr.inside = false;
+    if (e.timeStamp - ptr.t < 90) fling = clamp(fling + clamp(ptr.vx, -2600, 2600), -3200, 3200);
+    ptr.vx = 0;
+    loose = 1.6;
+    ripple(pull.x, clamp(Math.abs(pull.y) * 0.2, fs * 0.2, fs * 0.9));
+  });
+
+  stage.addEventListener('pointerleave', function () {
+    if (!ptr.down) ptr.inside = false;
+  });
+
+  stage.addEventListener('pointercancel', function () {
+    ptr.down = false;
+    ptr.inside = false;
+    ptr.vx = 0;
+    loose = 1.6;
+  });
+
+  stage.addEventListener('wheel', function (e) {
+    /* scrolling down or right pushes the text on in its reading direction, to the left */
+    var d = clamp(((e.deltaY || 0) + (e.deltaX || 0)) * -3, -1200, 1200);
+    fling = clamp(fling + d, -3200, 3200);
+    energy = Math.min(1, energy + 0.12);
+  }, { passive: true });
+
+  /* ---------- the tab icon takes the colours of this load ---------- */
+  function paintFavicon() {
+    try {
+      var link = document.getElementById('favicon');
+      if (!link) return;
+      var cs = getComputedStyle(document.documentElement);
+      var canvas = document.createElement('canvas');
+      canvas.width = canvas.height = 64;
+      var g = canvas.getContext('2d');
+      g.fillStyle = cs.getPropertyValue('--ground').trim() || '#2B35E8';
+      if (g.roundRect) {
+        g.beginPath();
+        g.roundRect(0, 0, 64, 64, 14);
+        g.fill();
+      } else {
+        g.fillRect(0, 0, 64, 64);
+      }
+      g.fillStyle = cs.getPropertyValue('--ink').trim() || '#F6F1E4';
+      g.font = "600 54px Fraunces, Georgia, serif";
+      g.textAlign = 'center';
+      g.textBaseline = 'alphabetic';
+      g.translate(32, 32);
+      g.rotate(-0.21);
+      g.fillText('a', 0, 14);
+      link.type = 'image/png';
+      link.href = canvas.toDataURL('image/png');
+    } catch (err) { /* the static icon stays */ }
+  }
+
+  if (document.fonts) {
+    var remeasure = function () { dirty = true; };
+    if (document.fonts.ready) document.fonts.ready.then(remeasure);
+    if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', remeasure);
+    if (document.fonts.load) document.fonts.load("600 54px Fraunces").then(paintFavicon, function () {});
+  }
+
+  /* ---------- one frame ---------- */
+  function frame(now) {
+    requestAnimationFrame(frame);
+
+    var dt = last ? (now - last) / 1000 : 0.016;
+    last = now;
+    if (dt > 0.05) dt = 0.05;
+    if (dt < 0.001) dt = 0.001;
+
+    var w = stage.clientWidth;
+    var h = stage.clientHeight;
+    if (!w || !h) return;
+    if (w !== W || h !== H) { W = w; H = h; dirty = true; }
+    if (dirty) {
+      if (!measure()) return;
+      dirty = false;
+    }
+    if (!items.length) return;
+
+    var live = calm ? 0 : 1;
+    var dir = DIRECTION < 0 ? -1 : 1;
+
+    /* movement leaves energy behind; energy makes the water choppier */
+    energy *= Math.exp(-dt / 1.3);
+    var rate = live * (1 + 1.8 * energy);
+    /* The shape mostly stays put and morphs; the letters travel through it.
+       The two long waves creep in opposite directions, the short one runs against the text. */
+    p1 -= 0.10 * rate * dt * dir;
+    p2 -= 0.07 * rate * dt * dir;
+    p3 -= 0.90 * rate * dt * dir;
+    ps += 0.13 * live * dt;
+    tb += 1.4 * rate * dt;
+    if (loose > 0) loose -= dt;
+
+    /* the wave: three sines of different length, drifting at different speeds */
+    var TAU = Math.PI * 2;
+    var pad = fs * 2.5;
+    var lam = clamp(W * 1.05, 380, 1100);
+    var A0 = Math.min(H * 0.2, lam * 0.36) * WAVE_HEIGHT;
+    var A = A0 * (0.86 + 0.14 * Math.sin(ps * 1.7 + 1));
+    var yc = H * 0.5 + Math.max(0, H * 0.5 - A0 - fs * 2) * 0.45 * Math.sin(ps);
+    var k1 = TAU / lam;
+    var k2 = TAU / (lam * 1.7);
+    var k3 = TAU / (lam * 0.42);
+    var a1 = A * 0.7 * (1 + 0.18 * Math.sin(ps * 2.3));
+    var a2 = A * 0.3 * (1 + 0.35 * Math.sin(ps * 3.1 + 2));
+    var a3 = A * (0.06 + 0.1 * energy);
+    var q2 = p2 + 1.3;
+    function base(x) {
+      return yc + a1 * Math.sin(k1 * x - p1) + a2 * Math.sin(k2 * x + q2) + a3 * Math.sin(k3 * x - p3);
+    }
+
+    /* the pull: a spring between the line and the pointer */
+    var target = 0;
+    if (ptr.seen && ptr.inside) {
+      var reach = ptr.y - base(ptr.x);
+      if (ptr.down) target = clamp(reach, -H * 0.6, H * 0.6);
+      else if (ptr.type !== 'touch') target = clamp(reach, -H * 0.5, H * 0.5) * 0.22;
+      if (Math.abs(pull.y) < 2 && Math.abs(pull.v) < 30) pull.x = ptr.x;
+      else pull.x += (ptr.x - pull.x) * Math.min(1, dt * 16);
+    }
+    var kS = ptr.down ? 170 : 70;
+    var cS = 5.5;
+    if (ptr.down) cS = 20;
+    else if (calm) cS = 17;
+    else if (ptr.inside && loose <= 0) cS = 9;
+    pull.v += (kS * (target - pull.y) - cS * pull.v) * dt;
+    pull.y += pull.v * dt;
+    /* the harder the pull, the wider the bend, so letters never fold over each other */
+    var sig = Math.max(clamp(W * 0.14, 90, 220), Math.sqrt(Math.abs(pull.y) * fs * 1.5));
+    var inv2s = 1 / (2 * sig * sig);
+
+    var i, j;
+    for (i = ripples.length - 1; i >= 0; i--) {
+      ripples[i].age += dt;
+      if (ripples[i].age > 3.6) ripples.splice(i, 1);
+    }
+
+    /* ripples scale with the type size for the same reason */
+    var ripK = TAU / (fs * 7);
+    var ripW = 1 / (32 * fs * fs);
+
+    /* sample the line and its running length */
+    var step = 6;
+    var x0 = -pad;
+    var n = Math.ceil((W + 2 * pad) / step) + 1;
+    if (!Y || Y.length < n) {
+      Y = new Float32Array(n + 32);
+      S = new Float32Array(n + 32);
+    }
+    for (j = 0; j < n; j++) {
+      var sx = x0 + j * step;
+      var sy = base(sx);
+      var dxp = sx - pull.x;
+      sy += pull.y * Math.exp(-dxp * dxp * inv2s);
+      for (var r = 0; r < ripples.length; r++) {
+        var rp = ripples[r];
+        var d = Math.abs(sx - rp.x) - 620 * rp.age;
+        sy += rp.amp * (1 - Math.exp(-rp.age * 14)) * Math.exp(-rp.age * 0.9) * Math.exp(-d * d * ripW) * Math.sin(d * ripK);
+      }
+      Y[j] = sy;
+      S[j] = j ? S[j - 1] + Math.hypot(step, sy - Y[j - 1]) : 0;
+    }
+    var jc = (W * 0.5 - x0) / step;
+    var jf = Math.floor(jc);
+    var Sc = S[jf] + (S[jf + 1] - S[jf]) * (jc - jf);
+    var Stot = S[n - 1];
+
+    /* the flow: steady drift plus whatever the last flick left over */
+    if (flow == null) {
+      var ji = clamp(Math.round((W * 0.07 - x0) / step), 0, n - 1);
+      flow = S[ji] - Sc - items[0].u;
+    }
+    fling *= Math.exp(-dt * 1.7);
+    flow += (fs * 1.8 * SPEED * dir * live + fling) * dt;
+
+    /* place every letter on the line */
+    var half = totalLen / 2;
+    var bobA = fs * 0.035 * (1 + 2 * energy) * live;
+
+    for (i = 0; i < items.length; i++) {
+      var it = items[i];
+      var u = (it.u + flow) % totalLen;
+      if (u < 0) u += totalLen;
+      if (u > half) u -= totalLen;
+      var s = u + Sc;
+      if (s <= 0 || s >= Stot) {
+        if (it.vis) {
+          it.vis = false;
+          it.el.style.visibility = 'hidden';
+        }
+        continue;
+      }
+
+      var lo = 0;
+      var hi = n - 1;
+      while (hi - lo > 1) {
+        var mid = (lo + hi) >> 1;
+        if (S[mid] <= s) lo = mid;
+        else hi = mid;
+      }
+      var f = (s - S[lo]) / ((S[hi] - S[lo]) || 1);
+      var x = x0 + (lo + f) * step;
+      var y = Y[lo] + (Y[hi] - Y[lo]) * f;
+      var j0 = lo > 0 ? lo - 1 : lo;
+      var j1 = hi < n - 1 ? hi + 1 : hi;
+      var a = Math.atan2(Y[j1] - Y[j0], (j1 - j0) * step);
+
+      /* a small swell runs along the text itself */
+      var bob = Math.sin(tb + it.seed) * bobA;
+      x -= Math.sin(a) * bob;
+      y += Math.cos(a) * bob;
+      a += Math.sin(tb * 0.8 + it.seed * 1.7) * 0.03 * live;
+
+      /* each letter has a little weight: it trails the line and overshoots when the line snaps */
+      if (!it.vis || calm || Math.abs(y - it.y) > fs * 4) {
+        it.y = y;
+        it.vy = 0;
+      } else {
+        it.vy += (90 * (y - it.y) - 11 * it.vy) * dt;
+        it.y += it.vy * dt;
+        y = it.y;
+      }
+
+      var st = it.el.style;
+      st.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) rotate(' + a.toFixed(3) + 'rad) translate(-50%,-62%)';
+      if (!it.vis) {
+        it.vis = true;
+        st.visibility = 'visible';
+      }
+    }
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
