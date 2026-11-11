@@ -47,7 +47,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&family=Instrument+Sans:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -184,29 +184,22 @@
     z-index: 1;
     display: flex;
     justify-content: center;
+    gap: 4px;
     padding: 0 16px calc(10px + env(safe-area-inset-bottom, 0px));
     pointer-events: none;
-    font-family: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    line-height: 1;
   }
+  /* Icon only, like the play / pause button; each name is in the link as hidden text. */
   .elsewhere a {
     pointer-events: auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 44px;
-    padding: 0 12px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
     color: var(--ink);
-    border-radius: 6px;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.3em;
+    touch-action: manipulation;
   }
-  .elsewhere a:hover { text-decoration-thickness: 2px; }
-  .elsewhere a svg { width: 9px; height: 9px; }
+  .elsewhere a svg { width: 18px; height: 18px; fill: currentColor; }
 
   /* Play / pause, top right. Icon only; its name lives in aria-label. */
   .motion {
@@ -234,14 +227,17 @@
   .motion[data-state="paused"] .icon-pause { opacity: 0; }
   .motion[data-state="paused"] .icon-play { opacity: 1; }
 
-  /* With motion allowed the button gives under the finger, and the icon that is
-     leaving shrinks and softens while the other grows in with a small overshoot. */
+  /* With motion allowed the button and the links give under the finger, and the icon
+     that is leaving shrinks and softens while the other grows in with a small overshoot. */
   @media (prefers-reduced-motion: no-preference) {
-    .motion { transition: transform 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .motion,
+    .elsewhere a { transition: transform 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     @media (hover: hover) and (pointer: fine) {
-      .motion:hover { transform: scale(1.1); }
+      .motion:hover,
+      .elsewhere a:hover { transform: scale(1.1); }
     }
-    .motion:active { transform: scale(0.86); }
+    .motion:active,
+    .elsewhere a:active { transform: scale(0.86); }
     .motion svg { transition: opacity 180ms ease, transform 280ms cubic-bezier(0.34, 1.45, 0.64, 1), filter 180ms ease; }
     .motion .icon-play,
     .motion[data-state="paused"] .icon-pause { transform: scale(0.5); filter: blur(2px); }
@@ -283,19 +279,20 @@
 </style>
 
 <script>
-/* A different field colour on each load. Runs in the head so the first paint is already right.
-   Every pair has a contrast ratio of 6:1 or better. */
+/* A different pair of colours on each load. Runs in the head so the first paint is already right.
+   Dark mode puts the darker colour on the field and the lighter in the letters, light mode the
+   other way round. Every pair has a contrast ratio of 6:1 or better. */
 (function () {
   var palettes = [
-    /* ground,    ink */
+    /* darker,    lighter */
     ['#2B35E8', '#F6F1E4'], // ultramarine
     ['#10402F', '#F3EBD3'], // forest
     ['#3A1638', '#F7D9E3'], // aubergine
-    ['#FF5A36', '#1A0F0A'], // vermilion
-    ['#F4D35E', '#1D1A3A'], // butter
-    ['#C9B8FF', '#1F1147'], // lilac
-    ['#BFE8D0', '#0F3B2E'], // mint
-    ['#FFB8D2', '#4A0D24']  // rose
+    ['#1A0F0A', '#FF5A36'], // vermilion
+    ['#1F1147', '#C9B8FF'], // lilac
+    ['#0F3B2E', '#BFE8D0'], // mint
+    ['#4A0D24', '#FFB8D2'], // rose
+    ['#3B2B1D', '#E5D7BD']  // sand
   ];
   var i = Math.floor(Math.random() * palettes.length);
   try {
@@ -305,19 +302,26 @@
     localStorage.setItem('ground-index', String(i));
   } catch (err) { /* storage is optional */ }
   var root = document.documentElement.style;
-  root.setProperty('--ground', palettes[i][0]);
-  root.setProperty('--ink', palettes[i][1]);
   var meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', palettes[i][0]);
-
-  /* The tab icon takes the same pair. The letter is the path from favicon.svg. */
   var icon = document.getElementById('favicon');
-  if (icon) {
-    icon.href = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="' + palettes[i][0] + '"/><path fill="' + palettes[i][1] + '" fill-rule="evenodd" d="M37.22 20.19L36.34 19.88L35.09 19.62L34.47 19.56L32.75 19.56L31.34 19.72L29.72 20.03L28.12 20.44L26.53 20.97L24.50 21.91L23.44 22.56L22.06 23.62L20.88 24.88L20.41 25.53L19.91 26.47L19.59 27.34L19.44 28.19L19.47 29.22L19.75 30.22L20.16 30.88L20.84 31.44L21.62 31.72L22.56 31.78L23.97 31.53L25.09 31.09L25.88 30.56L26.19 30.25L26.50 29.81L26.81 29.00L26.88 28.06L26.28 25.22L26.25 24.44L26.34 24.06L26.66 23.50L27.09 23.03L27.53 22.72L28.47 22.31L29.47 22.09L30.38 22.06L30.81 22.12L31.31 22.28L31.94 22.62L32.69 23.38L33.12 24.12L33.41 24.91L35.06 32.75L33.12 32.75L31.22 33.00L28.81 33.59L27.69 33.97L26.28 34.56L25.28 35.09L24.50 35.59L23.31 36.56L22.72 37.19L22.19 37.88L21.50 39.12L21.19 40.09L21.06 40.94L21.06 41.91L21.12 42.44L21.50 43.84L21.84 44.56L22.44 45.41L23.00 45.97L23.44 46.31L24.41 46.88L25.56 47.31L26.41 47.50L27.19 47.59L28.59 47.59L29.44 47.50L30.44 47.31L31.47 47.03L32.81 46.53L33.75 46.06L35.12 45.19L35.88 44.59L36.66 43.84L37.19 43.22L37.72 42.47L38.19 43.22L38.56 43.62L39.09 44.03L40.03 44.47L40.81 44.66L41.38 44.72L42.16 44.72L43.50 44.53L45.09 44.03L46.09 43.47L46.56 43.09L47.22 42.41L47.84 41.41L48.16 40.44L48.22 39.66L48.09 38.97L47.94 38.69L47.62 38.47L47.25 38.50L47.00 38.66L46.41 39.69L46.25 39.88L45.88 40.09L45.44 40.22L45.09 40.22L44.62 40.03L44.34 39.72L44.06 39.00L41.16 25.25L40.78 23.97L40.53 23.38L40.09 22.59L39.41 21.72L38.34 20.81ZM35.44 34.62L35.53 34.81L36.81 40.94L36.12 41.69L35.44 42.25L34.34 42.88L33.56 43.16L32.62 43.34L31.72 43.34L30.84 43.12L30.19 42.78L29.41 42.06L29.12 41.66L28.75 40.88L28.47 39.91L28.38 39.25L28.41 38.12L28.62 37.34L29.03 36.59L29.28 36.28L29.97 35.66L30.84 35.16L31.50 34.91L32.50 34.66L33.47 34.53L34.56 34.53Z"/></svg>');
-    /* the static .ico would otherwise outrank it in some browsers */
-    var ico = document.querySelector('link[rel="icon"][sizes]');
-    if (ico) ico.remove();
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function paint() {
+    var ground = palettes[i][mq.matches ? 0 : 1];
+    var ink = palettes[i][mq.matches ? 1 : 0];
+    root.setProperty('--ground', ground);
+    root.setProperty('--ink', ink);
+    if (meta) meta.setAttribute('content', ground);
+    /* The tab icon takes the same pair. The letter is the path from favicon.svg. */
+    if (icon) icon.href ='data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="' + ground + '"/><path fill="' + ink + '" fill-rule="evenodd" d="M37.22 20.19L36.34 19.88L35.09 19.62L34.47 19.56L32.75 19.56L31.34 19.72L29.72 20.03L28.12 20.44L26.53 20.97L24.50 21.91L23.44 22.56L22.06 23.62L20.88 24.88L20.41 25.53L19.91 26.47L19.59 27.34L19.44 28.19L19.47 29.22L19.75 30.22L20.16 30.88L20.84 31.44L21.62 31.72L22.56 31.78L23.97 31.53L25.09 31.09L25.88 30.56L26.19 30.25L26.50 29.81L26.81 29.00L26.88 28.06L26.28 25.22L26.25 24.44L26.34 24.06L26.66 23.50L27.09 23.03L27.53 22.72L28.47 22.31L29.47 22.09L30.38 22.06L30.81 22.12L31.31 22.28L31.94 22.62L32.69 23.38L33.12 24.12L33.41 24.91L35.06 32.75L33.12 32.75L31.22 33.00L28.81 33.59L27.69 33.97L26.28 34.56L25.28 35.09L24.50 35.59L23.31 36.56L22.72 37.19L22.19 37.88L21.50 39.12L21.19 40.09L21.06 40.94L21.06 41.91L21.12 42.44L21.50 43.84L21.84 44.56L22.44 45.41L23.00 45.97L23.44 46.31L24.41 46.88L25.56 47.31L26.41 47.50L27.19 47.59L28.59 47.59L29.44 47.50L30.44 47.31L31.47 47.03L32.81 46.53L33.75 46.06L35.12 45.19L35.88 44.59L36.66 43.84L37.19 43.22L37.72 42.47L38.19 43.22L38.56 43.62L39.09 44.03L40.03 44.47L40.81 44.66L41.38 44.72L42.16 44.72L43.50 44.53L45.09 44.03L46.09 43.47L46.56 43.09L47.22 42.41L47.84 41.41L48.16 40.44L48.22 39.66L48.09 38.97L47.94 38.69L47.62 38.47L47.25 38.50L47.00 38.66L46.41 39.69L46.25 39.88L45.88 40.09L45.44 40.22L45.09 40.22L44.62 40.03L44.34 39.72L44.06 39.00L41.16 25.25L40.78 23.97L40.53 23.38L40.09 22.59L39.41 21.72L38.34 20.81ZM35.44 34.62L35.53 34.81L36.81 40.94L36.12 41.69L35.44 42.25L34.34 42.88L33.56 43.16L32.62 43.34L31.72 43.34L30.84 43.12L30.19 42.78L29.41 42.06L29.12 41.66L28.75 40.88L28.47 39.91L28.38 39.25L28.41 38.12L28.62 37.34L29.03 36.59L29.28 36.28L29.97 35.66L30.84 35.16L31.50 34.91L32.50 34.66L33.47 34.53L34.56 34.53Z"/></svg>');
   }
+  paint();
+  /* switching the system between light and dark flips the pair in place */
+  if (mq.addEventListener) mq.addEventListener('change', paint);
+
+  /* the static .ico would otherwise outrank the painted icon in some browsers */
+  var ico = document.querySelector('link[rel="icon"][sizes]');
+  if (icon && ico) ico.remove();
 })();
 </script>
 </head>
@@ -334,8 +338,9 @@
   <svg class="icon-play" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M1 0.6v12.8a.6.6 0 0 0 .9.5l10.4-6.4a.6.6 0 0 0 0-1L1.9.1a.6.6 0 0 0-.9.5z"/></svg>
 </button>
 
-<footer class="elsewhere">
-  <a href="https://github.com/alexerlandsson/" target="_blank" rel="me noopener">GitHub<svg viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M2.5 1H9v6.5M9 1 1 9" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a>
+<footer class="elsewhere" role="contentinfo">
+  <a href="https://github.com/alexerlandsson/" target="_blank" rel="me noopener" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="visually-hidden">GitHub (opens in a new tab)</span></a>
+  <a href="https://se.linkedin.com/pub/alexander-erlandsson/55/8a5/159" target="_blank" rel="me noopener" title="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg><span class="visually-hidden">LinkedIn (opens in a new tab)</span></a>
 </footer>
 
 <script>
