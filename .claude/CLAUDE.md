@@ -14,7 +14,7 @@ The personal site at alexerlandsson.com: one page, `index.html`, with its CSS an
 ## Everything in the repo root is published
 
 - Each file in the root becomes a URL on the live site. Do not add notes, drafts or tooling files there.
-- Pages runs the default Jekyll build (there is no `.nojekyll`), which skips dotfiles and dot-directories. That is why this file lives in `.claude/` and not the root. Adding `.nojekyll` would publish it.
+- Pages runs the default Jekyll build (there is no `.nojekyll`), which skips dotfiles and dot-directories. That is why this file lives in `.claude/` and the README in `.github/` (GitHub still shows it on the repo page). Adding `.nojekyll` would publish both.
 - `CNAME` holds the custom domain. Do not delete or rename it.
 
 ## How `index.html` works
