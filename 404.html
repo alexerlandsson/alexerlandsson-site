@@ -69,13 +69,13 @@
   .corner a {
     display: grid;
     place-items: center;
+    width: 44px;
     height: 44px;
-    padding: 0 10px;
+    border-radius: 50%;
     color: inherit;
-    font-size: 1.25rem;
-    text-decoration: none;
     touch-action: manipulation;
   }
+  .corner a svg { width: 20px; height: 20px; fill: currentColor; }
 
   /* Play / pause, as on the front page. Icon only; its name lives in aria-label. */
   .motion {
@@ -150,7 +150,7 @@
 <body>
 
 <header class="corner">
-  <a href="/">Home</a>
+  <a href="/" title="Home"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8.5 1.25a.75.75 0 0 0-1 0L1.05 7a.55.55 0 0 0 .37.96H2.6V14a.75.75 0 0 0 .75.75H6.5V10.4h3v4.35h3.15a.75.75 0 0 0 .75-.75V7.96h1.18a.55.55 0 0 0 .37-.96z"/></svg><span class="visually-hidden">Home</span></a>
   <button type="button" class="motion" id="motion" data-state="playing" aria-label="Pause animation" title="Pause animation" hidden>
     <svg class="icon-pause" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><rect width="4" height="14" rx="1"/><rect x="8" width="4" height="14" rx="1"/></svg>
     <svg class="icon-play" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M1 0.6v12.8a.6.6 0 0 0 .9.5l10.4-6.4a.6.6 0 0 0 0-1L1.9.1a.6.6 0 0 0-.9.5z"/></svg>
