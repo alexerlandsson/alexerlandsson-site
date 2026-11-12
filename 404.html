@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Page not found – Alex Erlandsson</title>
+<meta name="robots" content="noindex">
+
+<!-- This page can be served at any depth, so every URL in it starts at the root. -->
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#F6F1E4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2B35E8" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&display=swap" rel="stylesheet">
+
+<style>
+  /* The fallback pair from index.html, with no script: the lighter colour on the
+     field in light mode, the darker in dark mode, as on the front page. */
+  :root {
+    --ground: #F6F1E4;
+    --ink: #2B35E8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #2B35E8;
+      --ink: #F6F1E4;
+    }
+  }
+
+  html, body { min-height: 100%; margin: 0; }
+  body { background: var(--ground); color: var(--ink); }
+
+  /* Set like the sentence on the front page when it has no JavaScript. */
+  main {
+    padding: 14vh 7vw;
+    font-family: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    font-size: clamp(1.875rem, 5.2vw, 4.75rem);
+    font-weight: 360;
+    font-optical-sizing: auto;
+    letter-spacing: 0.01em;
+    line-height: 1.12;
+  }
+  h1, p {
+    margin: 0;
+    max-width: 22ch;
+    font: inherit;
+    letter-spacing: inherit;
+    text-wrap: balance;
+  }
+  p { margin-top: 0.56em; }
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 0.04em;
+    text-underline-offset: 0.14em;
+  }
+  a:focus-visible { outline: 2px solid currentColor; outline-offset: 0.12em; }
+
+  @media print {
+    body { background: #fff; color: #000; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <h1>There’s nothing at this address.</h1>
+  <p><a href="/">Go to the front page</a></p>
+</main>
+
+</body>
+</html>

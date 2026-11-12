@@ -32,10 +32,14 @@ Two inline scripts with separate jobs:
 - Motion: `calm` follows `prefers-reduced-motion` until the visitor uses the play / pause button (`chosen`). `live` eases between 0 and 1 so pausing settles instead of cutting. The button is `hidden` in the markup and shown by the script.
 - Tunables sit at the top of the script: `DIRECTION`, `SPEED`, `WAVE_HEIGHT`.
 
+## `404.html`
+
+GitHub Pages serves it for any unknown path, at any depth, so every URL in it must start at the root. It has no script: it uses the fallback pair only, flipped by `prefers-color-scheme` in CSS, and is set like the front page's no-JavaScript sentence.
+
 ## Things that must stay in sync
 
 - **The sentence**: `#sentence` in `index.html`, the quote in `llms.txt`, and the meta description, Open Graph, Twitter and JSON-LD descriptions. `og-image.png` shows its opening words.
-- **The fallback colours** (`#2B35E8` on `#F6F1E4`, the first palette): `:root` in the CSS, `theme-color` meta, `favicon.svg`, `site.webmanifest`, and the PNG icons and `og-image.png`.
+- **The fallback colours** (`#2B35E8` on `#F6F1E4`, the first palette): `:root` in the CSS, `theme-color` meta, `favicon.svg`, `site.webmanifest`, `404.html`, and the PNG icons and `og-image.png`.
 - **The favicon letter path** is duplicated in `favicon.svg` and inside `paint()` in the palette script.
 - **Dates**: on a content change, update `dateModified` in the JSON-LD and `lastmod` in `sitemap.xml`.
 - **`llms.txt`** describes how the site behaves (no framework, no tracking, no cookies, pausable, colour changes each visit). Update it if any of that stops being true.
