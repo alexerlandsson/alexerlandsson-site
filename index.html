@@ -193,7 +193,7 @@
     color: var(--ink);
     touch-action: manipulation;
   }
-  .elsewhere a svg { width: 16px; height: 16px; fill: currentColor; }
+  .elsewhere a svg { width: 20px; height: 20px; fill: currentColor; }
 
   /* Play / pause, top right. Icon only; its name lives in aria-label. */
   .motion {
@@ -216,7 +216,7 @@
   }
   .motion[hidden] { display: none; }
   /* Both icons share one cell and cross-fade. */
-  .motion svg { grid-area: 1 / 1; width: 12px; height: 14px; fill: currentColor; transition: opacity 180ms ease; }
+  .motion svg { grid-area: 1 / 1; width: 15px; height: 17.5px; fill: currentColor; transition: opacity 180ms ease; }
   .motion .icon-play,
   .motion[data-state="paused"] .icon-pause { opacity: 0; }
   .motion[data-state="paused"] .icon-play { opacity: 1; }
