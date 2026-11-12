@@ -19,8 +19,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..800&display=swap" rel="stylesheet">
 
 <style>
-  /* The fallback pair from index.html, with no script: the lighter colour on the
-     field in light mode, the darker in dark mode, as on the front page. */
+  /* The first pair from index.html: the lighter colour on the field in light mode,
+     the darker in dark mode. The script below moves on to the next pair at every bounce. */
   :root {
     --ground: #F6F1E4;
     --ink: #2B35E8;
@@ -32,46 +32,267 @@
     }
   }
 
-  html, body { min-height: 100%; margin: 0; }
-  body { background: var(--ground); color: var(--ink); }
-
-  /* Set like the sentence on the front page when it has no JavaScript. */
-  main {
-    padding: 14vh 7vw;
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    overflow: hidden;
     font-family: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-    font-size: clamp(1.875rem, 5.2vw, 4.75rem);
     font-weight: 360;
     font-optical-sizing: auto;
     letter-spacing: 0.01em;
-    line-height: 1.12;
+    /* a new pair fades in instead of cutting */
+    transition: background-color 500ms ease, color 500ms ease;
   }
-  h1, p {
-    margin: 0;
-    max-width: 22ch;
-    font: inherit;
-    letter-spacing: inherit;
-    text-wrap: balance;
-  }
-  p { margin-top: 0.56em; }
 
-  a {
-    color: inherit;
-    text-decoration-thickness: 0.04em;
-    text-underline-offset: 0.14em;
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
-  a:focus-visible { outline: 2px solid currentColor; outline-offset: 0.12em; }
+
+  /* Top right: the way home, then play / pause where the front page has it. */
+  .corner {
+    position: fixed;
+    top: calc(8px + env(safe-area-inset-top, 0px));
+    right: calc(8px + env(safe-area-inset-right, 0px));
+    z-index: 1;
+    display: flex;
+    align-items: center;
+  }
+  .corner a {
+    display: grid;
+    place-items: center;
+    height: 44px;
+    padding: 0 10px;
+    color: inherit;
+    font-size: 1.0625rem;
+    text-decoration: none;
+    touch-action: manipulation;
+  }
+
+  /* Play / pause, as on the front page. Icon only; its name lives in aria-label. */
+  .motion {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    touch-action: manipulation; /* a quick second tap toggles again instead of zooming the page */
+  }
+  .motion[hidden] { display: none; }
+  /* Both icons share one cell and cross-fade. */
+  .motion svg { grid-area: 1 / 1; width: 12px; height: 14px; fill: currentColor; transition: opacity 180ms ease; }
+  .motion .icon-play,
+  .motion[data-state="paused"] .icon-pause { opacity: 0; }
+  .motion[data-state="paused"] .icon-play { opacity: 1; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .corner a,
+    .motion { transition: transform 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    @media (hover: hover) and (pointer: fine) {
+      .corner a:hover,
+      .motion:hover { transform: scale(1.1); }
+    }
+    .corner a:active,
+    .motion:active { transform: scale(0.86); }
+    .motion svg { transition: opacity 180ms ease, transform 280ms cubic-bezier(0.34, 1.45, 0.64, 1), filter 180ms ease; }
+    .motion .icon-play,
+    .motion[data-state="paused"] .icon-pause { transform: scale(0.5); filter: blur(2px); }
+    .motion[data-state="paused"] .icon-play { transform: none; filter: none; }
+  }
+
+  .corner a:focus-visible,
+  .motion:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
+
+  /* Without JavaScript, and until it first moves, the number sits in the middle. */
+  .stage {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+  .bounce {
+    margin: 0;
+    font-size: clamp(3.5rem, 12vw, 9rem);
+    font-variant-numeric: lining-nums;
+    line-height: 0.75; /* about the height of the figures, so they meet the edge and not their line box */
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .js .bounce {
+    position: absolute;
+    left: 0;
+    top: 0;
+    will-change: transform;
+  }
 
   @media print {
     body { background: #fff; color: #000; }
+    .motion { display: none; }
+    .js .bounce { position: static; transform: none !important; }
   }
 </style>
 </head>
 <body>
 
-<main>
-  <h1>There’s nothing at this address.</h1>
-  <p><a href="/">Go to the front page</a></p>
+<header class="corner">
+  <a href="/">Home</a>
+  <button type="button" class="motion" id="motion" data-state="playing" aria-label="Pause animation" title="Pause animation" hidden>
+    <svg class="icon-pause" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><rect width="4" height="14" rx="1"/><rect x="8" width="4" height="14" rx="1"/></svg>
+    <svg class="icon-play" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M1 0.6v12.8a.6.6 0 0 0 .9.5l10.4-6.4a.6.6 0 0 0 0-1L1.9.1a.6.6 0 0 0-.9.5z"/></svg>
+  </button>
+</header>
+
+<main class="stage" id="stage">
+  <h1 class="visually-hidden">Page not found</h1>
+  <p class="bounce" id="bounce" aria-hidden="true">404</p>
 </main>
 
+<script>
+/* The number drifts on a diagonal and turns back at every edge, like the logo on an idle
+   DVD player. Each bounce moves the page on to the next pair of colours. */
+(function () {
+  'use strict';
+
+  /* ---------- settings ---------- */
+  var SPEED = 1;           // speed multiplier, 0 stops the drift
+
+  var stage = document.getElementById('stage');
+  var el = document.getElementById('bounce');
+  if (!stage || !el || !window.requestAnimationFrame) return;
+  document.documentElement.classList.add('js');
+
+  /* ---------- colours: the pairs from index.html, keep the two lists the same ---------- */
+  var palettes = [
+    /* darker,    lighter */
+    ['#2B35E8', '#F6F1E4'], // ultramarine
+    ['#10402F', '#F3EBD3'], // forest
+    ['#3A1638', '#F7D9E3'], // aubergine
+    ['#1F1147', '#C9B8FF'], // lilac
+    ['#0F3B2E', '#BFE8D0'], // mint
+    ['#4A0D24', '#FFB8D2'], // rose
+    ['#3B2B1D', '#E5D7BD']  // sand
+  ];
+  var pair = 0;            // starts on the pair the stylesheet has already painted
+  var root = document.documentElement.style;
+  var metas = document.querySelectorAll('meta[name="theme-color"]');
+  var dark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function paint() {
+    var ground = palettes[pair][dark.matches ? 0 : 1];
+    var ink = palettes[pair][dark.matches ? 1 : 0];
+    root.setProperty('--ground', ground);
+    root.setProperty('--ink', ink);
+    for (var m = 0; m < metas.length; m++) metas[m].setAttribute('content', ground);
+  }
+  /* switching the system between light and dark flips the pair in place */
+  if (dark.addEventListener) dark.addEventListener('change', paint);
+
+  /* ---------- motion: follows the system setting until the visitor chooses ---------- */
+  var calm = false;          // true = the number holds still
+  var prefersCalm = false;
+  var chosen = null;
+  var motionBtn = document.getElementById('motion');
+
+  function syncMotion() {
+    calm = chosen === null ? prefersCalm : chosen;
+    if (motionBtn) {
+      var label = calm ? 'Play animation' : 'Pause animation';
+      motionBtn.setAttribute('data-state', calm ? 'paused' : 'playing');
+      motionBtn.setAttribute('aria-label', label);
+      motionBtn.setAttribute('title', label);
+    }
+  }
+
+  try {
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersCalm = mq.matches;
+    if (mq.addEventListener) {
+      mq.addEventListener('change', function (ev) {
+        prefersCalm = ev.matches;
+        syncMotion();
+      });
+    }
+  } catch (err) { /* keep motion on */ }
+
+  if (motionBtn) {
+    motionBtn.hidden = false;
+    motionBtn.addEventListener('click', function () {
+      chosen = !calm;
+      syncMotion();
+    });
+  }
+  syncMotion();
+  var live = calm ? 0 : 1;   // 1 = full motion, 0 = still; eased towards its goal every frame
+
+  /* ---------- one frame ---------- */
+  var x = 0, y = 0;
+  var dx = Math.random() < 0.5 ? -1 : 1;
+  var dy = Math.random() < 0.5 ? -1 : 1;
+  var moved = false, last = 0, sinceTurn = 1;
+
+  function frame(now) {
+    requestAnimationFrame(frame);
+
+    var dt = last ? (now - last) / 1000 : 0.016;
+    last = now;
+    if (dt > 0.05) dt = 0.05;
+
+    /* pausing and playing settle instead of cutting */
+    var goal = calm ? 0 : 1;
+    live += (goal - live) * (1 - Math.exp(-dt / 0.35));
+    if (Math.abs(goal - live) < 0.001) live = goal;
+
+    /* read every frame, so a resize or the font arriving needs no handling of its own */
+    var W = stage.clientWidth;
+    var maxX = Math.max(0, W - el.offsetWidth);
+    var maxY = Math.max(0, stage.clientHeight - el.offsetHeight);
+
+    /* it waits in the middle until it first moves */
+    if (!moved) {
+      x = maxX / 2;
+      y = maxY / 2;
+      moved = live > 0;
+    }
+
+    /* the same speed on both axes gives the 45 degree path; wider screens get a faster one */
+    var step = Math.max(90, Math.min(220, W * 0.12)) * SPEED * live * dt;
+    x += dx * step;
+    y += dy * step;
+
+    var turned = false;
+    if (x <= 0) { x = 0; if (dx < 0) { dx = 1; turned = true; } }
+    else if (x >= maxX) { x = maxX; if (dx > 0) { dx = -1; turned = true; } }
+    if (y <= 0) { y = 0; if (dy < 0) { dy = 1; turned = true; } }
+    else if (y >= maxY) { y = maxY; if (dy > 0) { dy = -1; turned = true; } }
+
+    /* At most two colour changes a second, so a corner or a very small window never flashes. */
+    sinceTurn += dt;
+    if (turned && sinceTurn > 0.5) {
+      sinceTurn = 0;
+      pair = (pair + 1) % palettes.length;
+      paint();
+    }
+
+    el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>

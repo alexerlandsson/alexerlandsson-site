@@ -34,12 +34,13 @@ Two inline scripts with separate jobs:
 
 ## `404.html`
 
-GitHub Pages serves it for any unknown path, at any depth, so every URL in it must start at the root. It has no script: it uses the fallback pair only, flipped by `prefers-color-scheme` in CSS, and is set like the front page's no-JavaScript sentence.
+GitHub Pages serves it for any unknown path, at any depth, so every URL in it must start at the root. A "404" drifts on a 45 degree path and turns back at every edge, like the logo on an idle DVD player, and each bounce moves the page on to the next palette pair (at most two changes a second). It starts on the fallback pair, which the CSS paints by `prefers-color-scheme`, so nothing flashes on load. The play / pause button and the `calm` / `chosen` / `live` logic are copied from the front page; with reduced motion or without JavaScript the number sits still in the middle.
 
 ## Things that must stay in sync
 
 - **The sentence**: `#sentence` in `index.html`, the quote in `llms.txt`, and the meta description, Open Graph, Twitter and JSON-LD descriptions. `og-image.png` shows its opening words.
 - **The fallback colours** (`#2B35E8` on `#F6F1E4`, the first palette): `:root` in the CSS, `theme-color` meta, `favicon.svg`, `site.webmanifest`, `404.html`, and the PNG icons and `og-image.png`.
+- **The palette list**: `palettes` in the head script of `index.html` and in the script of `404.html`.
 - **The favicon letter path** is duplicated in `favicon.svg` and inside `paint()` in the palette script.
 - **Dates**: on a content change, update `dateModified` in the JSON-LD and `lastmod` in `sitemap.xml`.
 - **`llms.txt`** describes how the site behaves (no framework, no tracking, no cookies, pausable, colour changes each visit). Update it if any of that stops being true.
